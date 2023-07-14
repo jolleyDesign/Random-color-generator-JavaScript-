@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Random Color Generator</title>
+        <style>
+            body {
+                text-align: center;
+                margin-top: 150px;
+                font-family: Arial, sans-serif;
+            }
+
+            #color-box {
+                width: 200px;
+                height: 200px;
+                margin: 0 auto;
+                border-radius: 10px;
+            }
+
+            #color-text {
+                margin-top: 20px;
+                font-size: 20px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="color-box"></div>
+        <div id="color-text"></div>
+
+        <script>
+            function generateRandomColor() {
+                var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+                return randomColor;
+            }
+
+            function updateColor() {
+                var colorBox = document.getElementById('color-box');
+                var colorText = document.getElementById('color-text');
+
+                var color = generateRandomColor();
+                colorBox.style.backgroundColor = color;
+                colorText.textContent = color;
+            }
+
+            function copyToClipboard(text) {
+                var dummyElement = document.createElement('textarea');
+                dummyElement.value = text;
+                document.body.appendChild(dummyElement);
+                dummyElement.select();
+                document.execCommand('copy');
+                document.body.removeChild(dummyElement);
+                alert('Copied to clipboard: ' + text);
+            }
+
+            var colorText = document.getElementById('color-text');
+            colorText.addEventListener('click', function () {
+                copyToClipboard(colorText.textContent);
+            });
+
+            updateColor();
+        </script>
+    </body>
+</html>
